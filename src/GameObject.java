@@ -53,6 +53,14 @@ public abstract class GameObject {
 	}
 	
 	/**
+	 * Getter for isVisible.
+	 * @return isVisible
+	 */
+	protected boolean isVisible() {
+		return this.isVisible;
+	}
+	
+	/**
 	 * Getter for direction.
 	 * @return direction
 	 */

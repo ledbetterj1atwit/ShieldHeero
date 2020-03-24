@@ -45,7 +45,31 @@ public class Arrow extends GameObject {
 		// TODO: miss animation.
 	}
 	
-	public void updateGraphic() {
+	/**
+	 * Getter for hit.
+	 * @return hit
+	 */
+	public boolean wasHit() {
+		return this.hit;
+	}
+	
+	/**
+	 * Getter for missed. 
+	 * @return missed
+	 */
+	public boolean wasMissed() {
+		return this.missed;
+	}
+	
+	/**
+	 * Update the arrow's shape based on size and the current frame.
+	 * @param currentFrame
+	 * @param screenX
+	 * @param screenY
+	 */
+	public void updateGraphic(long currentFrame, int screenX, int screenY) {
+		if(!this.isVisible()) return; // If not visible. Don't bother changing anything.
+		
 		// TODO: make the thing move towards the player.
 		// Use <this.frame> to do this.
 	}
