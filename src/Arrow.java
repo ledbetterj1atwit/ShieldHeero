@@ -24,7 +24,7 @@ public class Arrow extends GameObject {
 	 */
 	public Arrow(char direction, long frame) {
 		switch(direction) {
-			case 'N': this.shape = N_ARROW_SHAPE; this.direction = direction; break;
+			case 'N': this.shape = N_ARROW_SHAPE; this.direction = direction; break; // Make copy for shape.
 			case 'S': this.shape = S_ARROW_SHAPE; this.direction = direction; break;
 			case 'E': this.shape = E_ARROW_SHAPE; this.direction = direction; break;
 			case 'W': this.shape = W_ARROW_SHAPE; this.direction = direction; break;
