@@ -56,6 +56,13 @@ public class Game extends Application {
 		Timeline a = new Timeline(new KeyFrame(Duration.millis(FPS60), frameAction)); // Thing the make frames go brrr.
 		a.setCycleCount(Timeline.INDEFINITE);
 		a.play();
+		
+		/*
+		scene.requestFocus();
+		scene.setOnKeyPressed(e->{
+			// Keyboard control area.
+		}
+		*/
 	}
 
 }
