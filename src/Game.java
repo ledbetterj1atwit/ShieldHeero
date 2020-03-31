@@ -17,6 +17,7 @@ import javafx.util.Duration;
 public class Game extends Application {
 	// TODO: GUI and game logic (oof).
 	static long frameCount = 0; // How many frames have passed(and what frame your on)(level independent)
+	static long currentTime = 1;
 	
 	public static void main(String[] args) {
 		System.out.printf("Hello, world!");
@@ -36,16 +37,23 @@ public class Game extends Application {
 		mainStage.setScene(scene);
 		mainStage.show();
 		
+		long initTime = System.currentTimeMillis();
+		currentTime = initTime;
+		
 		// Game loop
 		EventHandler<ActionEvent> frameAction = new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {// Code in this overridden method runs every frame
-				text.setText(String.format("FPS: %d", frameCount));
+				double fps = currentTime; // Separated the fps related math to fix a div by 0 error.
+				fps = fps / 1000; // Yeah idk either... >_>
+				fps = frameCount / fps;
+				text.setText(String.format("FPS: %f", fps));
+				currentTime = System.currentTimeMillis() - initTime;
 				frameCount ++;
 			}
 		};
 		
-		Timeline a = new Timeline(new KeyFrame(Duration.millis(FPS30), frameAction)); // Thing the make frames go brrr.
+		Timeline a = new Timeline(new KeyFrame(Duration.millis(FPS60), frameAction)); // Thing the make frames go brrr.
 		a.setCycleCount(Timeline.INDEFINITE);
 		a.play();
 	}
