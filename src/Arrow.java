@@ -5,7 +5,7 @@
  */
 public class Arrow extends GameObject {
 	
-	private static Object N_ARROW_SHAPE; // Set these.
+	private static Object N_ARROW_SHAPE; // TODO: Set these.
 	private static Object S_ARROW_SHAPE;
 	private static Object E_ARROW_SHAPE;
 	private static Object W_ARROW_SHAPE;
@@ -24,7 +24,7 @@ public class Arrow extends GameObject {
 	 */
 	public Arrow(char direction, long frame) {
 		switch(direction) {
-			case 'N': this.shape = N_ARROW_SHAPE; this.direction = direction; break; // Make copy for shape.
+			case 'N': this.shape = N_ARROW_SHAPE; this.direction = direction; break; // TODO: Make copy for shape.
 			case 'S': this.shape = S_ARROW_SHAPE; this.direction = direction; break;
 			case 'E': this.shape = E_ARROW_SHAPE; this.direction = direction; break;
 			case 'W': this.shape = W_ARROW_SHAPE; this.direction = direction; break;

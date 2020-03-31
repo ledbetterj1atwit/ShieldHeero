@@ -84,7 +84,29 @@ public class Player extends GameObject {
 	}
 
 	public void updateGraphic() {
-		// TODO: add animations maybe???
+		if(!this.isVisible()) return; // If not visible. Don't bother changing anything.
+		
+		// Big if block for moving from current direction to next direction.
+		if(this.direction == 'N') {
+			if(cDir == S) {} // cDir is a place holder. Need to find a way to get the shape's current facing direction. May just put a bunch of shapes in a pane and move that.
+			else if(cDir == E) {}
+			else if(cDir == W) {}
+		}
+		else if(this.direction == 'S') {
+			if(cDir == N) {}
+			else if(cDir == E) {}
+			else if(cDir == W) {}
+		}
+		else if (this.direction == 'E') {
+			if(cDir == N) {}
+			else if(cDir == S) {}
+			else if(cDir == W) {}
+		}
+		else if (this.direction == 'W') {
+			if(cDir == N) {}
+			else if(cDir == S) {}
+			else if(cDir == E) {}
+		}
 		
 	}
 	

@@ -53,6 +53,13 @@ public abstract class GameObject {
 	}
 	
 	/**
+	 * Returns the shape to put into the scene.
+	 */
+	public Object getShape() {
+		return this.shape;
+	}
+	
+	/**
 	 * Getter for isVisible.
 	 * @return isVisible
 	 */
@@ -71,7 +78,7 @@ public abstract class GameObject {
 	/**
 	 * Abstract method for anything graphic junk that gets updated every frame.
 	 */
-	public abstract void updateGraphic();
+	//public abstract void updateGraphic();
 	
 	// TODO: any other methods needed for the shield and arrows?
 }

@@ -9,6 +9,7 @@ public class Level {
 	private ArrayList<Arrow> arrows; // The arrows.
 	private String name; // A name.
 	private int difficulty; // An arbitrary difficulty thing.
+	private Object music; // Music for level.
 	
 	/**
 	 * Basic constructor.
