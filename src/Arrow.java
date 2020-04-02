@@ -1,3 +1,5 @@
+import javafx.scene.layout.Pane;
+
 /**
  * Represents an arrow that will hit the player.
  * @author ledbetterj1
@@ -16,6 +18,8 @@ public class Arrow extends GameObject {
 	private boolean hit = false; // Did the player block the arrow.
 	private boolean missed = false; // Or did they not.
 		// If both are false the arrow has not come by the player yet.
+	
+	private int frameBuffer; // How many frames between when the arrow appears on screen and when it hits the player.
 	
 	/**
 	 * Your basic constructor.
@@ -69,6 +73,25 @@ public class Arrow extends GameObject {
 	 */
 	public void updateGraphic(long currentFrame, int screenX, int screenY) {
 		if(!this.isVisible()) return; // If not visible. Don't bother changing anything.
+		if(currentFrame < this.frame-this.frameBuffer) return; // Do nothing if too early in level.
+		int frameRatio = (int) (currentFrame/this.frame); // Where between the player and the edge of the screen the arrow should be.
+		int arrowEdgeDistanceX = 0; // Distance between the origin of the arrow and its edge.
+		int arrowEdgeDistanceY = 0;
+		int playerEdgeDistanceX = 0; // Distance between the origin of the player and the edge.
+		int playerEdgeDistanceY = 0; // Distance between the origin of the player and the edge.
+		int distanceX = screenX/2 - playerEdgeDistanceX;
+		int distanceY = screenY/2 - playerEdgeDistanceY;
+		int x = 0; //Final x and y positions.
+		int y = 0; 
+		
+		switch(direction) {
+		case 'N': x = screenX/2; y = (distanceY*frameRatio) - arrowEdgeDistanceY; break;
+		case 'W': x = (distanceX*frameRatio) - arrowEdgeDistanceX; y = screenY/2; break;
+		case 'S': x = screenX/2; y = (distanceY*(1/frameRatio)) + arrowEdgeDistanceY; break;
+		case 'E': x = (distanceX*(1/frameRatio)) + arrowEdgeDistanceX; y = screenY/2; break;
+		}
+		
+		//Set the calculated x and y for the arrow;
 		
 		// TODO: make the thing move towards the player.
 		// Use <this.frame> to do this.
