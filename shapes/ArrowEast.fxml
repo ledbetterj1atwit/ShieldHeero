@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
+
+
+<Pane maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Polygon fill="#f0ff1f" layoutX="50.0" layoutY="60.0" points="-49.999977111816406, -9.999988555908203, 50.0, 40.0, 50.000022888183594, -59.9999885559082" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fill="RED" layoutX="260.0" layoutY="228.0" points="-224.40000915527344, -163.1999969482422, -224.40000915527344, -191.1999969482422, -258.0, -177.99998474121094" stroke="TRANSPARENT" strokeType="INSIDE" />
+   </children>
+</Pane>

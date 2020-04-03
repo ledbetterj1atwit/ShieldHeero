@@ -5,6 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,9 +32,18 @@ public class Game extends Application {
 		final double FPS30 = (1000/30.0); // Constants for 30 and 60 fps respectively.
 		final double FPS60 = (1000/60.0);
 		
-		BorderPane pane = new BorderPane(); // Set up a window with a piece of text.
+		Pane arrow = new Pane();
+		Polygon arrowBase = new Polygon(0, 10, 30, 0, 30, 30);
+		arrowBase.setFill(Color.YELLOW);
+		Polygon arrowTip = new Polygon(0, 10, 5, 7, 5, 12);
+		arrowTip.setFill(Color.RED);
+		arrow.getChildren().addAll(arrowBase, arrowTip);
+		
+		Pane pane = new Pane(); // Set up a window with a piece of text.
 		Text text = new Text(50, 50, "");
-		pane.setCenter(text);
+		pane.getChildren().add(text);
+		pane.getChildren().add(arrow);
+		
 		Scene scene = new Scene(pane, 200, 200);
 		mainStage.setTitle("ugh");
 		mainStage.setScene(scene);
@@ -48,6 +60,7 @@ public class Game extends Application {
 				fps = fps / 1000; // Yeah idk either... >_>
 				fps = frameCount / fps;
 				text.setText(String.format("FPS: %f", fps));
+				arrow.setLayoutX(mainStage.getWidth()/2);
 				currentTime = System.currentTimeMillis() - initTime;
 				frameCount ++;
 			}

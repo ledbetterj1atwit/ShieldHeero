@@ -1,3 +1,5 @@
+import javafx.scene.layout.Pane;
+
 /**
  * This is the player and more importantly their shield.
  * @author ledbetterj1
@@ -5,7 +7,7 @@
  */
 public class Player extends GameObject {
 	
-	private static Object DEFAULT_PLAYER_SHAPE; // The default player shape. DO NOT MODIFY!
+	private static Pane DEFAULT_PLAYER_SHAPE; // The default player shape. DO NOT MODIFY!
 		// TODO: Define this.
 	
 	private int lives; // The players lives. At 0 they are dead.

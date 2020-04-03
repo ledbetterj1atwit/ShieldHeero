@@ -1,3 +1,5 @@
+import javafx.scene.layout.Pane;
+
 /**
  * This class holds a game object, either an arrow or the player's shield.
  * This is abstract as you should never instantiate this.
@@ -6,7 +8,7 @@
  */
 public abstract class GameObject {
 	
-	protected Object shape; // Holds the JavaEffects shape to display on screen.
+	protected Pane shape; // Holds the JavaEffects shape to display on screen.
 		// TODO: Pick a better type. Is JavaFX.Shape a thing?
 	
 	protected char direction; // Holds what direction the thing is facing.

@@ -7,10 +7,10 @@ import javafx.scene.layout.Pane;
  */
 public class Arrow extends GameObject {
 	
-	private static Object N_ARROW_SHAPE; // TODO: Set these.
-	private static Object S_ARROW_SHAPE;
-	private static Object E_ARROW_SHAPE;
-	private static Object W_ARROW_SHAPE;
+	private static Pane N_ARROW_SHAPE; // TODO: Set these.
+	private static Pane S_ARROW_SHAPE;
+	private static Pane E_ARROW_SHAPE;
+	private static Pane W_ARROW_SHAPE;
 	
 	private long frame; // The frame when the arrow will collide with the shield.
 		// Its long just in the amount of frames in a level is a lot. Longs at just like int s.
@@ -75,20 +75,18 @@ public class Arrow extends GameObject {
 		if(!this.isVisible()) return; // If not visible. Don't bother changing anything.
 		if(currentFrame < this.frame-this.frameBuffer) return; // Do nothing if too early in level.
 		int frameRatio = (int) (currentFrame/this.frame); // Where between the player and the edge of the screen the arrow should be.
-		int arrowEdgeDistanceX = 0; // Distance between the origin of the arrow and its edge.
-		int arrowEdgeDistanceY = 0;
-		int playerEdgeDistanceX = 0; // Distance between the origin of the player and the edge.
-		int playerEdgeDistanceY = 0; // Distance between the origin of the player and the edge.
-		int distanceX = screenX/2 - playerEdgeDistanceX;
-		int distanceY = screenY/2 - playerEdgeDistanceY;
+		int arrowCenterDistance = 0; // Distance between the origin of the arrow and its center.
+		int playerWidth = 0;
+		int distanceX = (screenX/2) - (playerWidth/2);
+		int distanceY = (screenY/2) - (playerWidth/2);
 		int x = 0; //Final x and y positions.
 		int y = 0; 
 		
 		switch(direction) {
-		case 'N': x = screenX/2; y = (distanceY*frameRatio) - arrowEdgeDistanceY; break;
-		case 'W': x = (distanceX*frameRatio) - arrowEdgeDistanceX; y = screenY/2; break;
-		case 'S': x = screenX/2; y = (distanceY*(1/frameRatio)) + arrowEdgeDistanceY; break;
-		case 'E': x = (distanceX*(1/frameRatio)) + arrowEdgeDistanceX; y = screenY/2; break;
+		case 'N': x = screenX/2-arrowCenterDistance; y = (distanceY*frameRatio); break;
+		case 'W': x = (distanceX*frameRatio); y = screenY/2-arrowCenterDistance; break;
+		case 'S': x = screenX/2-arrowCenterDistance; y = (distanceY*(1/frameRatio)); break;
+		case 'E': x = (distanceX*(1/frameRatio)); y = screenY/2-arrowCenterDistance; break;
 		}
 		
 		//Set the calculated x and y for the arrow;
