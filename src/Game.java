@@ -165,6 +165,7 @@ public class Game extends Application {
 		Pane basePane = new Pane();
 		VBox centerPane = new VBox();
 		Text title = new Text("Sheild Heero");
+		title.setStyle("-fx-font: 40 arial;");
 		Button start = new Button("Start");
 		Button exit = new Button("Quit");
 		
@@ -173,7 +174,7 @@ public class Game extends Application {
 		
 		centerPane.getChildren().add(title);
 		centerPane.getChildren().add(start);
-		centerPane.setLayoutX((s.getWidth()/2)-45);
+		centerPane.setLayoutX((s.getWidth()/2)-130);
 		centerPane.setLayoutY((s.getHeight()/2)-30);
 		centerPane.setAlignment(Pos.CENTER);
 		
