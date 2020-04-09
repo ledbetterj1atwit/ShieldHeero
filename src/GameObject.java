@@ -25,7 +25,7 @@ public abstract class GameObject {
 	 * @param shape
 	 * @param direction
 	 */
-	protected GameObject(Object shape, char direction) {
+	protected GameObject(Pane shape, char direction) {
 		this.shape = shape;
 		this.direction = direction;
 	}
