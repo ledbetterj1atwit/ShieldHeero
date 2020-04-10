@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
@@ -9,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -27,6 +29,8 @@ public class Game extends Application {
 	// TODO: GUI and game logic (oof).
 	static long frameCount = 0; // How many frames have passed(and what frame your on)(level independent)
 	static long currentTime = 1;
+	static int screenWidth = 750;
+	static int screenHeight = 500;
 	static int levelSelected = 0;
 	static ArrayList<Level> levels = new ArrayList<Level>();
 	
@@ -206,33 +210,51 @@ public class Game extends Application {
 		// in run configurations
 	}
 	
-	public void start(Stage mainStage) {
+	public void start(Stage mainStage) throws FileNotFoundException {
 		final double FPS30 = (1000/30.0); // Constants for 30 and 60 fps respectively.
 		final double FPS60 = (1000/60.0);
+		
+		Player player = new Player(3);
+		Arrow testArrow = new Arrow('N', (long)99999);
 		
 		levels.add(new Level(new ArrayList<Arrow>(), "Lorem ipsum dolor sit", 0));
 		levels.add(new Level(new ArrayList<Arrow>(), "Lorem ipsum dolor sit amet", -1));
 		levels.add(new Level(new ArrayList<Arrow>(), "Lorem ipsum dolor sit amet", 2));
 		levels.add(new Level(new ArrayList<Arrow>(), "Lorem ipsum dolor sit amet", 999));
 		
-		Pane arrow = new Pane();
-		Polygon arrowBase = new Polygon(0, 10, 30, 0, 30, 30);
-		arrowBase.setFill(Color.YELLOW);
-		Polygon arrowTip = new Polygon(0, 10, 5, 7, 5, 12);
-		arrowTip.setFill(Color.RED);
-		arrow.getChildren().addAll(arrowBase, arrowTip);
 		
-		Pane pane = new Pane(); // Set up a window with a piece of text.
-		Text text = new Text(50, 50, "");
-		pane.getChildren().add(text);
-		pane.getChildren().add(arrow);
 		
-		Scene scene = new Scene(pane, 200, 200);
-		Scene startScene = new Scene(new Pane(), 750, 500);
-		Scene levelScene = new Scene(new Pane(), 750, 500);
+		
+		
+		Pane basePane = new Pane(); // Set up a window with a piece of text.
+		Text fpsCount = new Text();
+		Text frameCountDisplay = new Text(String.format("Frame: %d", frameCount));
+		Text lives = new Text(String.format("Lives: $d", player.getLives()));
+		Text score = new Text(String.format("Score: $d", player.getScore()));
+		Text multiplyer = new Text(String.format("Multiplyer: $d", player.getMultiplyer()));
+		basePane.getChildren().add(lives);
+		lives.setLayoutY(20);
+		basePane.getChildren().add(fpsCount);
+		fpsCount.setLayoutY(40);
+		basePane.getChildren().add(frameCountDisplay);
+		frameCountDisplay.setLayoutY(60);
+		basePane.getChildren().add(score);
+		score.setLayoutX(screenWidth-120);
+		score.setLayoutY(20);
+		basePane.getChildren().add(multiplyer);
+		multiplyer.setLayoutX(screenWidth-80);
+		multiplyer.setLayoutY(40);
+		
+		basePane.getChildren().add(player.getShape());
+		player.setShapePos((screenWidth/2)-50, (screenHeight/2)-50); // Put the player in the center of the screen.
+		testArrow.setShapePos(0,0);
+		
+		Scene gameScene = new Scene(basePane, screenWidth, screenHeight);
+		Scene startScene = new Scene(new Pane(), screenWidth, screenHeight);
+		Scene levelScene = new Scene(new Pane(), screenWidth, screenHeight);
 		
 		setupStartScene(startScene, levelScene, mainStage);
-		setupLevelSelcetScene(levelScene, startScene, scene, mainStage);
+		setupLevelSelcetScene(levelScene, startScene, gameScene, mainStage);
 		
 		mainStage.setTitle("Main Menu");
 		mainStage.setScene(startScene);
@@ -248,9 +270,18 @@ public class Game extends Application {
 				double fps = currentTime; // Separated the fps related math to fix a div by 0 error.
 				fps = fps / 1000; // Yeah idk either... >_>
 				fps = frameCount / fps;
-				text.setText(String.format("FPS: %f", fps));
-				arrow.setLayoutX(mainStage.getWidth()/2);
+				fpsCount.setText(String.format("FPS: %f", fps));
+				frameCountDisplay.setText(String.format("Frame: %d", frameCount));
 				currentTime = System.currentTimeMillis() - initTime;
+				if(frameCount > (60*10)) {
+					player.setDirection('W');
+				}
+				player.updateGraphic();
+				
+				lives.setText(String.format(String.format("Lives: %d", player.getLives())));
+				score.setText(String.format(String.format("Score: %d", player.getScore())));
+				multiplyer.setText(String.format(String.format("Multiplier: %d", player.getMultiplyer())));
+				
 				frameCount ++;
 			}
 		};

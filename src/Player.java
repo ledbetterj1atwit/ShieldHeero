@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -7,8 +12,7 @@ import javafx.scene.layout.Pane;
  */
 public class Player extends GameObject {
 	
-	private static Pane DEFAULT_PLAYER_SHAPE; // The default player shape. DO NOT MODIFY!
-		// TODO: Define this.
+	private static String imgPath = "sprites\\player.png";
 	
 	private int lives; // The players lives. At 0 they are dead.
 	private int score; // The player's score for the level.
@@ -18,12 +22,17 @@ public class Player extends GameObject {
 	 * Your basic constructor.
 	 * Direction is 'N'and isVisible is false by default ;
 	 * @param lives
+	 * @throws FileNotFoundException 
 	 */
-	public Player(int lives) {
-		super(shape, 'N'); // TODO: make the copy for this.
+	public Player(int lives) throws FileNotFoundException {
+		super(new ImageView(new Image(new FileInputStream(imgPath))), 'N'); // TODO: make the copy for this.
 		this.score = 0;
 		this.multiplier = 1;
 		this.lives = lives;
+		this.shape.setFitHeight(100); // Force player to be 100x100 px.
+		this.shape.setFitWidth(100);
+		this.setShapeRotation(90);
+		this.makeVisible();
 	}
 	
 	/**
@@ -53,6 +62,14 @@ public class Player extends GameObject {
 	}
 	
 	/**
+	 * Getter for mult.
+	 * @return
+	 */
+	public int getMultiplyer() {
+		return this.multiplier;
+	}
+	
+	/**
 	 * Call when the player successfully blocks an arrow.
 	 */
 	public void score() {
@@ -65,7 +82,7 @@ public class Player extends GameObject {
 	 * @return lives
 	 */
 	public int getLives() {
-		return this.getLives();
+		return this.lives;
 	}
 	
 	/**
@@ -90,24 +107,16 @@ public class Player extends GameObject {
 		
 		// Big if block for moving from current direction to next direction.
 		if(this.direction == 'N') {
-			if(cDir == S) {} // cDir is a place holder. Need to find a way to get the shape's current facing direction. May just put a bunch of shapes in a pane and move that.
-			else if(cDir == E) {}
-			else if(cDir == W) {}
+			this.setShapeRotation(90);
 		}
 		else if(this.direction == 'S') {
-			if(cDir == N) {}
-			else if(cDir == E) {}
-			else if(cDir == W) {}
+			this.setShapeRotation(-90);
 		}
 		else if (this.direction == 'E') {
-			if(cDir == N) {}
-			else if(cDir == S) {}
-			else if(cDir == W) {}
+			this.setShapeRotation(180);
 		}
 		else if (this.direction == 'W') {
-			if(cDir == N) {}
-			else if(cDir == S) {}
-			else if(cDir == E) {}
+			this.setShapeRotation(0);
 		}
 		
 	}

@@ -1,3 +1,4 @@
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -8,7 +9,7 @@ import javafx.scene.layout.Pane;
  */
 public abstract class GameObject {
 	
-	protected Pane shape; // Holds the JavaEffects shape to display on screen.
+	protected ImageView shape; // Holds the JavaEffects shape to display on screen.
 		// TODO: Pick a better type. Is JavaFX.Shape a thing?
 	
 	protected char direction; // Holds what direction the thing is facing.
@@ -22,11 +23,11 @@ public abstract class GameObject {
 	
 	/**
 	 * Constructor.
-	 * @param shape
+	 * @param imageView
 	 * @param direction
 	 */
-	protected GameObject(Pane shape, char direction) {
-		this.shape = shape;
+	protected GameObject(ImageView imageView, char direction) {
+		this.shape = imageView;
 		this.direction = direction;
 	}
 	
@@ -57,10 +58,27 @@ public abstract class GameObject {
 	/**
 	 * Returns the shape to put into the scene.
 	 */
-	public Object getShape() {
+	public ImageView getShape() {
 		return this.shape;
 	}
 	
+	/**
+	 * Sets the layout x and y of the shape.
+	 * @param x layout x in pixels
+	 * @param y layout y in pixels
+	 */
+	public void setShapePos(int x, int y) {
+		this.shape.setLayoutX(x);
+		this.shape.setLayoutY(y);
+	}
+	
+	/**
+	 * Sets the rotation of the shape.
+	 * @param deg Rotation in degrees, clockwise.
+	 */
+	public void setShapeRotation(double deg) {
+		this.shape.setRotate(deg);
+	}
 	/**
 	 * Getter for isVisible.
 	 * @return isVisible

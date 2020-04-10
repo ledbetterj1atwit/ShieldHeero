@@ -1,3 +1,8 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
 /**
@@ -7,13 +12,11 @@ import javafx.scene.layout.Pane;
  */
 public class Arrow extends GameObject {
 	
-	private static Pane N_ARROW_SHAPE; // TODO: Set these.
-	private static Pane S_ARROW_SHAPE;
-	private static Pane E_ARROW_SHAPE;
-	private static Pane W_ARROW_SHAPE;
-	
 	private long frame; // The frame when the arrow will collide with the shield.
 		// Its long just in the amount of frames in a level is a lot. Longs at just like int s.
+	
+	private static String imgPath = "sprites\\arrow_black.png";
+	private static String nullPath = "sprites\\null.png";
 	
 	private boolean hit = false; // Did the player block the arrow.
 	private boolean missed = false; // Or did they not.
@@ -25,14 +28,17 @@ public class Arrow extends GameObject {
 	 * Your basic constructor.
 	 * @param direction
 	 * @param frame
+	 * @throws FileNotFoundException 
 	 */
-	public Arrow(char direction, long frame) {
+	public Arrow(char direction, long frame) throws FileNotFoundException {
+		super(new ImageView(new Image(new FileInputStream(imgPath))), direction);
+		this.shape.setFitWidth(40); // make the image width a nice to compute number.
 		switch(direction) {
-			case 'N': this.shape = N_ARROW_SHAPE; this.direction = direction; break; // TODO: Make copy for shape.
-			case 'S': this.shape = S_ARROW_SHAPE; this.direction = direction; break;
-			case 'E': this.shape = E_ARROW_SHAPE; this.direction = direction; break;
-			case 'W': this.shape = W_ARROW_SHAPE; this.direction = direction; break;
-			default: this.shape = N_ARROW_SHAPE; this.direction = direction; break;
+			case 'N': this.direction = direction; break;
+			case 'S': this.setShapeRotation(180); break;
+			case 'E': this.setShapeRotation(90); break;
+			case 'W': this.setShapeRotation(-90); break;
+			default: this.direction = direction; break;
 		}
 		
 		this.frame = frame;
@@ -87,8 +93,9 @@ public class Arrow extends GameObject {
 		case 'W': x = (distanceX*frameRatio); y = screenY/2-arrowCenterDistance; break;
 		case 'S': x = screenX/2-arrowCenterDistance; y = (distanceY*(1/frameRatio)); break;
 		case 'E': x = (distanceX*(1/frameRatio)); y = screenY/2-arrowCenterDistance; break;
-		}
 		
+		}
+		this.setShapePos(x, y);
 		//Set the calculated x and y for the arrow;
 		
 		// TODO: make the thing move towards the player.
