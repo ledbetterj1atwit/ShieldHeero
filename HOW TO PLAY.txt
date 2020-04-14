@@ -1,0 +1,3 @@
+Click buttons to navigate menus.
+Use arrow keys to face on-coming arrows and block them.
+Use escape to quit game while playing. (ends game entirely)

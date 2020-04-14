@@ -1,5 +1,4 @@
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 
 /**
  * This class holds a game object, either an arrow or the player's shield.
@@ -10,15 +9,13 @@ import javafx.scene.layout.Pane;
 public abstract class GameObject {
 	
 	protected ImageView shape; // Holds the JavaEffects shape to display on screen.
-		// TODO: Pick a better type. Is JavaFX.Shape a thing?
 	
 	protected char direction; // Holds what direction the thing is facing.
 		// Values: 'N', 'S', 'E', 'W'.
 		// For arrows this represents where the arrow is coming from('N' is top of screen).
 		// For shield its where the shield is facing
 	
-	private boolean isVisible = false; // Used for toggling the object's visibility on screen and in game logic.
-		// always false by default.
+	private boolean isVisible = false; // Used for toggling the object's visibility in game logic.
 	
 	
 	/**
@@ -31,21 +28,13 @@ public abstract class GameObject {
 		this.direction = direction;
 	}
 	
-	/**
-	 * Zero parameter constructor needed for arrow.
-	 * @param shape
-	 * @param direction
-	 */
-	protected GameObject() {
-		this.shape = null;
-		this.direction = 'N';
-	}
 	
 	/**
 	 * Makes the object visible on screen and to game logic.
 	 */
 	protected void makeVisible() {
 		this.isVisible = true;
+		this.shape.setVisible(true);
 	}
 	
 	/**
@@ -53,6 +42,7 @@ public abstract class GameObject {
 	 */
 	protected void makeInvisible() {
 		this.isVisible = false;
+		this.shape.setVisible(false);
 	}
 	
 	/**
@@ -79,6 +69,7 @@ public abstract class GameObject {
 	public void setShapeRotation(double deg) {
 		this.shape.setRotate(deg);
 	}
+	
 	/**
 	 * Getter for isVisible.
 	 * @return isVisible
@@ -96,9 +87,7 @@ public abstract class GameObject {
 	}
 	
 	/**
-	 * Abstract method for anything graphic junk that gets updated every frame.
+	 * Method to reInitalize a gameObject, usualy when loading a level.
 	 */
-	//public abstract void updateGraphic();
-	
-	// TODO: any other methods needed for the shield and arrows?
+	public abstract void reInit();
 }

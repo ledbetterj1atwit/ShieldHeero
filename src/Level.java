@@ -9,7 +9,7 @@ public class Level {
 	private ArrayList<Arrow> arrows; // The arrows.
 	private String name; // A name.
 	private int difficulty; // An arbitrary difficulty thing.
-	private Object music; // Music for level.
+	//private Object music; // Music for level.
 	
 	/**
 	 * Basic constructor.
@@ -30,6 +30,14 @@ public class Level {
 	 */
 	public Arrow getArrow(int idx) {
 		return this.arrows.get(idx);
+	}
+	
+	/**
+	 * Get the arrows ArrayList.
+	 * @return arrows
+	 */
+	public ArrayList<Arrow> getArrows(){
+		return this.arrows;
 	}
 	
 	/**
@@ -80,6 +88,27 @@ public class Level {
 	public void updateGraphic(long currentFrame, int screenX, int screenY) {
 		for(Arrow a : this.arrows) {
 			a.updateGraphic(currentFrame, screenX, screenY);
+		}
+	}
+	
+	/**
+	 * Check collisions of the arrows in this level against the player.
+	 * @param p the player
+	 * @param currentFrame the level frame
+	 */
+	public void checkColisions(Player p, Long currentFrame) {
+		for(Arrow a : this.getArrows()) { // Handle arrow collision.
+			if(a.getFrame() == currentFrame) {
+				if (p.getDirection() == a.getDirection()){
+					p.score();
+					a.hit();
+				}
+				else {
+					p.gotHit();
+					a.miss();
+				}
+				a.makeInvisible();
+			}
 		}
 	}
 }
