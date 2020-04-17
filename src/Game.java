@@ -448,6 +448,7 @@ public class Game extends Application {
 		
 		mainStage.setTitle("Main Menu"); // Show the start screen.
 		mainStage.setScene(startScene);
+		mainStage.setResizable(false); // Disable resizing.
 		mainStage.show();
 		
 		// Game loop
